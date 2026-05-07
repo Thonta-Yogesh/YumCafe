@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment Variables
+.env
+
+# Database (Local in-memory storage folder)
+backend/localdb/
+
+# macOS system files
+.DS_Store
+
+# Build output (if you ever build the frontend)
+dist/
+build/
