@@ -18,7 +18,7 @@ app.use('/api/reservation', require('./routes/reservation'));
 
 const connectDB = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/hungryapp';
+    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/yumcafe';
     await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB successfully');
     console.log(`🔗 Database URI: ${mongoUri}`);

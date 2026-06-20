@@ -66,6 +66,37 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// ROUTE 2.5: Authenticate a user via OAuth: POST "/api/auth/oauth-login". No login required
+router.post('/oauth-login', async (req, res) => {
+  let success = false;
+  try {
+    const { email, name } = req.body;
+    
+    let user = await User.findOne({ email });
+    if (!user) {
+      // Create new user with random password since OAuth does not provide one
+      const salt = await bcrypt.genSalt(10);
+      const randomPassword = crypto.randomBytes(16).toString('hex');
+      const secPassword = await bcrypt.hash(randomPassword, salt);
+
+      user = await User.create({
+        name: name || 'User',
+        email,
+        password: secPassword,
+      });
+    }
+
+    const data = { user: { id: user.id } };
+    const authToken = jwt.sign(data, JWT_SECRET);
+    success = true;
+    res.json({ success, authToken });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // ROUTE 3: Get loggedin User details: POST "/api/auth/getuser". Login required
 router.post('/getuser', fetchuser, async (req, res) => {
   try {
@@ -106,10 +137,10 @@ router.post('/forgot-password', async (req, res) => {
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER || 'noreply@hungryapp.com',
+      from: process.env.EMAIL_USER || 'noreply@yumcafe.com',
       to: user.email,
-      subject: 'HungryApp Password Reset Link',
-      text: `Hello,\n\nYou requested a password reset for your HungryApp account.\n\nPlease click the following link, or paste it into your browser to complete the process:\n\n${resetUrl}\n\nThis link will expire in 1 hour.\n\nIf you did not request this, please ignore this email.\n`
+      subject: 'YumCafe Password Reset Link',
+      text: `Hello,\n\nYou requested a password reset for your YumCafe account.\n\nPlease click the following link, or paste it into your browser to complete the process:\n\n${resetUrl}\n\nThis link will expire in 1 hour.\n\nIf you did not request this, please ignore this email.\n`
     };
 
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {

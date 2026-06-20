@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { auth, googleProvider, outlookProvider } from '../firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -28,6 +30,35 @@ export default function Login() {
       }
     }
     setLoading(false);
+  };
+
+  const handleOAuth = async (providerName) => {
+    if (!auth) {
+      alert(`To use ${providerName} login, please add your Firebase credentials to src/firebase.js`);
+      return;
+    }
+    
+    try {
+      const provider = providerName === 'Google' ? googleProvider : outlookProvider;
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      
+      // Sync with MongoDB backend to get standard JWT
+      const response = await axios.post('https://yumcafe.onrender.com/api/auth/oauth-login', {
+        email: user.email,
+        name: user.displayName || 'User'
+      });
+
+      if (response.data.success) {
+        localStorage.setItem('smartCartAuthToken', response.data.authToken);
+        navigate('/');
+      } else {
+        alert("OAuth backend sync failed.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert(`${providerName} login failed: ${error.message}`);
+    }
   };
 
   const onChange = (e) => {
@@ -88,11 +119,11 @@ export default function Login() {
           </div>
 
           <div className="d-flex flex-column gap-3 mb-4">
-            <button type="button" className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
+            <button type="button" onClick={() => handleOAuth('Google')} className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style={{ width: '20px' }} />
               Continue with Google
             </button>
-            <button type="button" className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
+            <button type="button" onClick={() => handleOAuth('Outlook')} className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
               <img src="https://www.svgrepo.com/show/452062/microsoft.svg" alt="Outlook" style={{ width: '20px' }} />
               Continue with Outlook
             </button>
