@@ -36,7 +36,7 @@ export default function Login() {
 
   return (
     <div className="auth-bg d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '90vh' }}>
-      <div className="auth-form-container text-center w-100 p-5 mt-4">
+      <div className="auth-form-container text-center w-100 p-5 mt-4" style={{ maxWidth: '450px', borderRadius: '24px' }}>
         {/* Title tuned to the classy theme */}
         <h1 className="fw-bold mb-3" style={{ color: 'var(--text-white)' }}>Welcome Back</h1>
         <p className="text-muted mb-4 fs-5">Login to your <span style={{ color: 'var(--accent-peach)', fontWeight: 'bold' }}>Yum</span> profile.</p>
@@ -77,7 +77,7 @@ export default function Login() {
             </Link>
           </div>
           
-          <button type="submit" className="btn btn-peach w-100 fs-5 py-3 mb-4" disabled={loading} style={{ borderRadius: '15px' }}>
+          <button type="submit" className="btn btn-peach w-100 justify-content-center fs-5 py-3 mb-4" disabled={loading} style={{ borderRadius: '15px' }}>
             {loading ? 'Authenticating...' : 'Sign In'}
           </button>
           
