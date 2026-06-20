@@ -10,7 +10,7 @@ export default function Reservations() {
     const token = localStorage.getItem('smartCartAuthToken');
     if (token) {
       try {
-        const response = await fetch('http://localhost:5001/api/reservation/myreservations', {
+        const response = await fetch('https://yumcafe.onrender.com/api/reservation/myreservations', {
           method: 'GET',
           headers: { 'auth-token': token }
         });
@@ -35,7 +35,7 @@ export default function Reservations() {
     const token = localStorage.getItem('smartCartAuthToken');
     if (token) {
       try {
-        const response = await fetch(`http://localhost:5001/api/reservation/cancel/${id}`, {
+        const response = await fetch(`https://yumcafe.onrender.com/api/reservation/cancel/${id}`, {
           method: 'DELETE',
           headers: { 'auth-token': token }
         });
@@ -57,7 +57,7 @@ export default function Reservations() {
     const token = localStorage.getItem('smartCartAuthToken');
     
     try {
-      const response = await fetch('http://localhost:5001/api/reservation/book', {
+      const response = await fetch('https://yumcafe.onrender.com/api/reservation/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

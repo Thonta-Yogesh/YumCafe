@@ -87,7 +87,7 @@ export default function Home() {
     const token = localStorage.getItem('smartCartAuthToken');
 
     try {
-      const response = await fetch('http://localhost:5001/api/reservation/book', {
+      const response = await fetch('https://yumcafe.onrender.com/api/reservation/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

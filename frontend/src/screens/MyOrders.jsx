@@ -10,7 +10,7 @@ export default function MyOrders() {
 
   const fetchMyOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/order/myorders', {
+      const response = await axios.get('https://yumcafe.onrender.com/api/order/myorders', {
         headers: {
           'auth-token': localStorage.getItem('smartCartAuthToken'),
         }

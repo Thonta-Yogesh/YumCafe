@@ -14,7 +14,7 @@ export default function ForgotPassword() {
     setMessage('');
     setError('');
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/forgot-password', { email });
+      const response = await axios.post('https://yumcafe.onrender.com/api/auth/forgot-password', { email });
       if (response.data.success) {
         setMessage(response.data.message);
       }

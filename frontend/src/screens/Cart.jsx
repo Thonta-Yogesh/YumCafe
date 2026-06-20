@@ -112,7 +112,7 @@ export default function Cart() {
 
     try {
       const response = await axios.post(
-        'http://localhost:5001/api/order/place',
+        'https://yumcafe.onrender.com/api/order/place',
         {
           items: data.map(item => ({ foodId: item.id, name: item.name, quantity: item.qty, price: item.price })),
           subTotal,

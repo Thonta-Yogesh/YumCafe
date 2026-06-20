@@ -23,7 +23,7 @@ export default function ResetPassword() {
     setMessage('');
     setError('');
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/reset-password', {
+      const response = await axios.post('https://yumcafe.onrender.com/api/auth/reset-password', {
         email,
         token,
         newPassword: passwords.newPassword
