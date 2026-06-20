@@ -46,8 +46,8 @@ export default function Login() {
             <label htmlFor="exampleInputEmail1" className="form-label fw-semibold text-white">Email Address</label>
             <input 
               type="email" 
-              className="form-control form-control-lg bg-light border-0 px-4" 
-              style={{ borderRadius: '20px' }}
+              className="form-control form-control-lg px-4" 
+              style={{ borderRadius: '15px' }}
               name="email" 
               value={credentials.email} 
               onChange={onChange} 
@@ -60,12 +60,13 @@ export default function Login() {
             <label htmlFor="exampleInputPassword1" className="form-label fw-semibold text-white">Password</label>
             <input 
               type="password" 
-              className="form-control form-control-lg bg-light border-0 px-4" 
-              style={{ borderRadius: '20px' }}
+              className="form-control form-control-lg px-4" 
+              style={{ borderRadius: '15px' }}
               name="password" 
               value={credentials.password} 
               onChange={onChange} 
               id="exampleInputPassword1" 
+              placeholder="••••••••"
               required
             />
           </div>
@@ -76,15 +77,32 @@ export default function Login() {
             </Link>
           </div>
           
-          <button type="submit" className="btn btn-peach w-100 fs-5 mt-3 py-2" disabled={loading}>
+          <button type="submit" className="btn btn-peach w-100 fs-5 py-3 mb-4" disabled={loading} style={{ borderRadius: '15px' }}>
             {loading ? 'Authenticating...' : 'Sign In'}
           </button>
+          
+          <div className="d-flex align-items-center mb-4">
+            <hr className="flex-grow-1" style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+            <span className="px-3 text-muted" style={{ fontSize: '0.85rem' }}>OR</span>
+            <hr className="flex-grow-1" style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+          </div>
+
+          <div className="d-flex flex-column gap-3 mb-4">
+            <button type="button" className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style={{ width: '20px' }} />
+              Continue with Google
+            </button>
+            <button type="button" className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
+              <img src="https://www.svgrepo.com/show/452062/microsoft.svg" alt="Outlook" style={{ width: '20px' }} />
+              Continue with Outlook
+            </button>
+          </div>
           
           <div className="mt-4 pt-2">
             <p className="text-muted">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-decoration-none fw-bold" style={{ color: 'var(--accent-peach)' }}>
-                Join now
+              <Link to="/signup" className="text-decoration-none fw-bold" style={{ color: 'var(--text-white)' }}>
+                Sign up for free
               </Link>
             </p>
           </div>

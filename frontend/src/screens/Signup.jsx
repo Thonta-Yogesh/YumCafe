@@ -47,8 +47,8 @@ export default function Signup() {
             <label htmlFor="name" className="form-label fw-semibold text-white">Full Name</label>
             <input 
               type="text" 
-              className="form-control form-control-lg bg-light border-0 px-4" 
-              style={{ borderRadius: '20px' }}
+              className="form-control form-control-lg px-4" 
+              style={{ borderRadius: '15px' }}
               name="name" 
               value={credentials.name} 
               onChange={onChange} 
@@ -60,8 +60,8 @@ export default function Signup() {
             <label htmlFor="exampleInputEmail1" className="form-label fw-semibold text-white">Email Address</label>
             <input 
               type="email" 
-              className="form-control form-control-lg bg-light border-0 px-4" 
-              style={{ borderRadius: '20px' }}
+              className="form-control form-control-lg px-4" 
+              style={{ borderRadius: '15px' }}
               name="email" 
               value={credentials.email} 
               onChange={onChange} 
@@ -74,8 +74,8 @@ export default function Signup() {
             <label htmlFor="exampleInputPassword1" className="form-label fw-semibold text-white">Password</label>
             <input 
               type="password" 
-              className="form-control form-control-lg bg-light border-0 px-4" 
-              style={{ borderRadius: '20px' }}
+              className="form-control form-control-lg px-4" 
+              style={{ borderRadius: '15px' }}
               name="password" 
               value={credentials.password} 
               onChange={onChange} 
@@ -85,14 +85,31 @@ export default function Signup() {
             />
           </div>
           
-          <button type="submit" className="btn btn-peach w-100 fs-5 mt-2 py-2" disabled={loading}>
+          <button type="submit" className="btn btn-peach w-100 fs-5 py-3 mb-4" disabled={loading} style={{ borderRadius: '15px' }}>
             {loading ? 'Registering...' : 'Sign Up'}
           </button>
+          
+          <div className="d-flex align-items-center mb-4">
+            <hr className="flex-grow-1" style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+            <span className="px-3 text-muted" style={{ fontSize: '0.85rem' }}>OR</span>
+            <hr className="flex-grow-1" style={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+          </div>
+
+          <div className="d-flex flex-column gap-3 mb-4">
+            <button type="button" className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style={{ width: '20px' }} />
+              Sign up with Google
+            </button>
+            <button type="button" className="btn btn-trans w-100 d-flex align-items-center justify-content-center gap-2 py-2" style={{ borderRadius: '15px' }}>
+              <img src="https://www.svgrepo.com/show/452062/microsoft.svg" alt="Outlook" style={{ width: '20px' }} />
+              Sign up with Outlook
+            </button>
+          </div>
           
           <div className="mt-4 pt-2">
             <p className="text-muted">
               Already a user?{' '}
-              <Link to="/login" className="text-decoration-none fw-bold" style={{ color: 'var(--accent-peach)' }}>
+              <Link to="/login" className="text-decoration-none fw-bold" style={{ color: 'var(--text-white)' }}>
                 Log in
               </Link>
             </p>

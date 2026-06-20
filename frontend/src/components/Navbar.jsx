@@ -56,14 +56,26 @@ export default function Navbar() {
         {/* Brand Name */}
         <Link className="navbar-brand" to="/">Yum</Link>
 
-        <button 
-          className="navbar-toggler border-0" 
-          type="button" 
-          onClick={() => setMobileMenuOpen(true)}
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        <div className="d-flex align-items-center ms-auto d-lg-none">
+          {localStorage.getItem('smartCartAuthToken') && (
+            <Link className="btn-cart-dark me-3" style={{ width: '38px', height: '38px' }} to="/cart" title="View Cart" onClick={() => setMobileMenuOpen(false)}>
+              <span style={{ fontSize: '0.9rem' }}>🛒</span>
+              {cartItems.length > 0 && (
+                <span className="badge-green">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
+          )}
+          <button 
+            className="navbar-toggler border-0 p-0" 
+            type="button" 
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
 
         <div className={`collapse navbar-collapse navbar-collapse-drawer ${mobileMenuOpen ? 'open' : ''}`} id="navbarNav">
           {/* Close button for mobile menu */}
@@ -113,7 +125,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link className="btn-cart-dark" to="/cart" title="View Cart" onClick={() => setMobileMenuOpen(false)}>
+                <Link className="btn-cart-dark d-none d-lg-flex" to="/cart" title="View Cart" onClick={() => setMobileMenuOpen(false)}>
                   <span>🛒</span>
                   {cartItems.length > 0 && (
                     <span className="badge-green">

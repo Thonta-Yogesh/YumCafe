@@ -17,7 +17,7 @@
 }
 
 /* ── Base ── */
-body {
+html, body {
   margin: 0;
   font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   background-color: var(--bg-dark);
