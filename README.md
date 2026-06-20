@@ -1,76 +1,75 @@
-# HungryApp - Smart Food Delivery Platform 🍕🍔
+# YumCafe 🍣🥢
 
-A fully functional, secure, and modern food delivery app built using the **MERN Stack** (MongoDB, Express, React, Node.js) with Bootstrap v5 styling.
+![YumCafe Banner](https://img.shields.io/badge/MERN-Stack-blue?style=for-the-badge&logo=mongodb)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
----
+**YumCafe** is a premium, modern, full-stack food ordering and reservation platform built with the MERN stack (MongoDB, Express, React, Node.js). Designed with a focus on immersive UX/UI, the platform features a highly responsive, glassmorphic design architecture, seamless animations, and a robust backend.
 
-## 🏗️ Architecture & Component Breakdown
-Below is the explanation of all the tools and their respective roles in this project, separated into Backend and Frontend.
-
-### 🏠 Backend Node.js Environment (`/backend`)
-Handles business logic, user authentication, database operations, and external API calls.
-
-1. **`server.js`**
-   - **Job**: The entry point for the backend. It connects to the MongoDB database, initializes the Express server, enables Cross-Origin Resource Sharing (CORS), sets up JSON parsing middleware, and registers all the API routes. 
-2. **`models/User.js`, `models/Food.js`, `models/Order.js`**
-   - **Job**: These define the schemas/structure for storing documents inside MongoDB using `mongoose`.
-   - `User.js` handles user details (encrypted password, email, etc.).
-   - `Food.js` handles menu items natively.
-   - `Order.js` manages relationship logic: A user ID and a list of food IDs, prices, and quantities for cart checkout persistence.
-3. **`routes/auth.js`**
-   - **Job**: Exposes user registration (`/register`) and login (`/login`) functionality. It uses `bcryptjs` to hash and compare passwords before creating `jsonwebtoken` (JWT) user access tokens.
-4. **`routes/food.js`**
-   - **Job**: Retrieves all food available on the platform (`/all`). Also contains a useful `/seed` endpoint to populate starting dummy data on the first run.
-5. **`routes/order.js`**
-   - **Job**: Endpoints for tracking User purchases. `/place` handles posting the completed cart. `/myorders` extracts order history specific to the authenticated User making the request.
-6. **`middleware/fetchuser.js`**
-   - **Job**: Acts as a gateway function before secure endpoints. It reads the `auth-token` header, validates the JSON Web Token, decodes the User's ID, and appends it to the `req` context for safe database queries.
-
-### 🌐 Frontend Vite + React (`/frontend`)
-User interface and global state management layer built using React.
-
-1. **`ContextReducer.jsx` (Smart Cart Management)**
-   - **Job**: Implements the globally accessible Context API and useReducer hook. 
-   - State includes: `ADD` (new items), `REMOVE` (deleting specific items), `UPDATE` (the **Smart Cart Rule**: seamlessly accumulating the quantity/price of items that share the same food id to prevent clutter), and `DROP` (clearing cart post-checkout).
-2. **`App.jsx` & `main.jsx`**
-   - **Job**: `main.jsx` initializes React, loading Bootstrap's JS/CSS natively. `App.jsx` handles global `<Router>` navigation across specific screens and wraps everything with the Cart Context Provider.
-3. **`components/Navbar.jsx`**
-   - **Job**: A responsive dynamic header. Depending on `localStorage` containing an active Authentication token, it intuitively flips between offering *"Login/Signup"* buttons or exposing private routes like *"My Cart"* and *"My Orders"*. It also dynamically prints out a red badge tallying how many total items hover inside the Cart.
-4. **`components/Card.jsx`**
-   - **Job**: Render logic for individual Food items. Embeds options for setting quantities, tracking price math inline dynamically, and firing payload `ADD/UPDATE` action dispatchers directly to the CartReducer when clicked.
-5. **`screens/Home.jsx`**
-   - **Job**: Fetches available foods via the backend `/api/food` endpoints. On first boot, triggers the `/seed` auto-generator if the database is newly created.
-6. **`screens/Cart.jsx`**
-   - **Job**: The checkout table. Maps globally mapped Cart data dynamically into rows allowing the Delete logic ("🗑️ Remove from Cart"). Performs math calculation for Checkout buttons which securely fires API fetches to place orders.
-7. **`screens/MyOrders.jsx` (Order History)**
-   - **Job**: Fetches JSON payload mapped purely to what the Authenticated user has requested in the past, iterating out dates and items purchased natively.
-8. **`screens/Login.jsx` & `screens/Signup.jsx`**
-   - **Job**: Standard secure forms passing form contents securely via Axios requests, and saving returned `JWT Token` natively to `localStorage` enabling App usage.
+This project demonstrates strong proficiency in both frontend aesthetics and backend architecture, showcasing the ability to build production-ready, scalable web applications.
 
 ---
 
-## 🚀 How to Run the App Local Environment
+## ✨ Features
 
-**Prerequisites:** 
-- Node.js (v16+)
-- A local MongoDB instance running on `localhost:27017`
+### 🎨 Frontend (React + Vite)
+- **Immersive Glassmorphic UI:** A visually stunning, modern design utilizing backdrop filters, dynamic gradients, and animated components (Scroll Reveals, Blur Texts, Border Glows).
+- **Fully Responsive Design:** A custom mobile-first drawer navigation and perfectly scaled components ensuring a seamless experience across all devices (Desktop, Tablet, Mobile).
+- **State Management:** Efficient client-side state management handling complex user interactions like real-time cart updates, authentication status, and active menu filtering.
+- **Dynamic Routing:** Utilizes React Router for secure, seamless navigation between Home, Menu, Cart, Orders, and Reservation pages.
 
-**1. Run Backend server**
-Open a new terminal window inside the repository and run:
-\`\`\`bash
-cd backend
-npm start
-# OR
-node server.js
-\`\`\`
-Server boots onto port `5001`.
+### ⚙️ Backend (Node.js + Express)
+- **Robust RESTful API:** A well-structured Express.js backend handling CRUD operations for Food Items, User Authentication, Orders, and Reservations.
+- **Secure Authentication:** Implements JWT (JSON Web Tokens) and bcrypt for secure user registration, login, and protected route access.
+- **Cloud Database Integration:** Fully integrated with **MongoDB Atlas** for scalable, cloud-based data storage.
+- **Data Modeling:** Utilizes Mongoose ODM for strict schema validation and relationship mapping (Users -> Orders).
 
-**2. Run Frontend Client**
-Open a separate terminal window and run:
-\`\`\`bash
-cd frontend
-npm run dev
-\`\`\`
-Client boots onto standard Vite port (`http://localhost:3000`).
+---
 
-Happy ordering! 🚀
+## 🚀 Tech Stack
+
+- **Frontend:** React.js, Vite, Bootstrap (Customized), CSS3 (Custom Animations), React Router DOM.
+- **Backend:** Node.js, Express.js.
+- **Database:** MongoDB (Atlas Cloud), Mongoose ODM.
+- **Authentication:** JSON Web Tokens (JWT), bcrypt.js.
+- **Deployment:** Ready for deployment on Vercel (Frontend) and Render (Backend).
+
+---
+
+## 🛠️ Installation & Setup (Local Development)
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/YumCafe.git
+   cd YumCafe
+   ```
+
+2. **Backend Setup:**
+   ```bash
+   cd backend
+   npm install
+   # Create a .env file in the backend directory with:
+   # PORT=5001
+   # MONGO_URI=your_mongodb_connection_string
+   # JWT_SECRET=your_jwt_secret
+   node server.js
+   ```
+
+3. **Frontend Setup:**
+   ```bash
+   cd ../frontend
+   npm install
+   npm run dev
+   ```
+
+4. **Access the application:**
+   Open your browser and navigate to `http://localhost:3001`
+
+---
+
+## 👨‍💻 About the Developer
+Built by a passionate software engineer focusing on delivering high-quality, user-centric web applications. Actively seeking opportunities in Full-Stack and Frontend Development roles.
+
+*If you are a recruiter or hiring manager, please feel free to explore the codebase. I am open to discussing my architectural decisions, the UI/UX design process, and my approach to building this application!*

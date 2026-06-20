@@ -5,12 +5,17 @@ package-lock.json
 # Environment Variables
 .env
 
-# Database (Local in-memory storage folder)
+# Database (Local storage folders)
 backend/localdb/
+data/
 
 # macOS system files
 .DS_Store
+**/.DS_Store
 
-# Build output (if you ever build the frontend)
+# Build output
 dist/
 build/
+
+# Database Dump
+backend/dump/

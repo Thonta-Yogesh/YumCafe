@@ -1,0 +1,80 @@
+/* ── OrderTracking.css ─────────────────
+   Styles for OrderTracking.jsx —
+   Live tracking page with progress bar
+   ──────────────────────────────────── */
+
+.tracking-page { padding: 100px 0; min-height: 80vh; background-color: var(--bg-dark); }
+
+.tracking-title { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; color: #fff; }
+.tracking-title span { color: var(--accent-peach); }
+
+.tracking-card {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.tracking-header { text-align: center; margin-bottom: 40px; }
+.tracking-header h3 { font-family: 'Outfit', sans-serif; color: #fff; font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; }
+
+.eta-badge {
+  display: inline-block;
+  background: var(--accent-peach);
+  color: var(--bg-dark);
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 1rem;
+}
+
+/* Progress bar track */
+.tracking-map-mockup { position: relative; height: 80px; margin: 60px 0 40px; }
+.progress-line-bg {
+  position: absolute;
+  top: 50%; left: 10%; right: 10%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+.progress-line-fill { height: 100%; background: var(--accent-peach); border-radius: 3px; transition: width 1.5s ease-in-out; }
+
+/* Stop dots */
+.stop-point {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 2;
+  border: 2px solid var(--bg-dark);
+}
+.stop-point.p1 { left: 10%; }
+.stop-point.p2 { left: 90%; }
+
+/* Animated delivery bike */
+.delivery-bike {
+  position: absolute;
+  top: 0%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  z-index: 3;
+  transition: left 1.5s ease-in-out;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+/* Detail rows */
+.tracking-details { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; }
+.detail-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1.05rem; }
+.detail-row:last-child { margin-bottom: 0; }
+.detail-label { color: rgba(255,255,255,0.6); }
+.detail-value { color: #fff; font-weight: 500; }

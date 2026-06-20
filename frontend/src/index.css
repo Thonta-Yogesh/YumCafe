@@ -1,168 +1,185 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* ══════════════════════════════════════
+   index.css — Global Design System
+   Variables · Body · Shared Buttons ·
+   Section Headers · Auth Forms · Utils
+   ══════════════════════════════════════ */
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+  --bg-dark:          #0b0b0c;
+  --bg-dark-card:     #131315;
+  --accent-peach:     #fda4af;
+  --accent-peach-hover: #fecdd3;
+  --text-white:       #ffffff;
+  --text-grey:        #9ca3af;
+}
+
+/* ── Base ── */
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, sans-serif;
-  background-color: #f4f6f9;
-  color: #2c3e50;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  overflow-x: hidden;
 }
 
-.custom-navbar {
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+/* Override Bootstrap text-muted — too dark on dark bg */
+.text-muted { color: #b0b7c3 !important; }
+
+/* ── Utility Classes ── */
+.text-peach { color: var(--accent-peach) !important; }
+.bg-peach   { background-color: var(--accent-peach) !important; }
+
+/* ── Shared Section Labels ── */
+.section-tag {
+  color: var(--accent-peach);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 750;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-white);
+  margin-bottom: 24px;
+}
+.section-title span { color: var(--accent-peach); }
+
+/* ── Buttons ── */
+.btn-peach {
+  background-color: var(--accent-peach) !important;
+  color: #0b0b0c !important;
+  font-weight: 700;
+  border-radius: 50px;
+  padding: 12px 28px;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+.btn-peach:hover {
+  background-color: var(--accent-peach-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(253, 164, 175, 0.35);
 }
 
-/* Beautiful Carousel */
-.carousel-inner {
-  max-height: 600px;
-  border-radius: 0 0 30px 30px;
-  overflow: hidden;
+.btn-outline-peach {
+  background-color: transparent;
+  color: var(--accent-peach) !important;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 12px 28px;
+  border: 2px solid var(--accent-peach) !important;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-outline-peach:hover {
+  background-color: rgba(253, 164, 175, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(253, 164, 175, 0.15);
 }
 
-.carousel-img {
-  object-fit: cover;
-  height: 600px;
-  width: 100%;
-  filter: brightness(60%);
+.btn-trans {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-white) !important;
+  font-weight: 500;
+  border-radius: 50px;
+  padding: 12px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-trans:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.carousel-caption-centered {
+/* Cart circular icon button */
+.btn-cart-dark {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--text-white);
+  transition: all 0.3s ease;
+}
+.btn-cart-dark:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-peach);
+  border-color: var(--accent-peach);
+}
+.btn-cart-dark .badge-green {
+  background-color: #22c55e;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  z-index: 10;
-}
-
-.search-bar-classy {
-  border-radius: 50px;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease;
-}
-
-.search-bar-classy:focus {
-  background: #ffffff;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  outline: none;
-}
-
-.category-title {
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
   font-weight: 700;
-  font-size: 2.2rem;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  color: #1a1a1a;
-  border-bottom: 3px solid #ff6b6b;
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-/* Classy Cards */
-.card-container {
-  perspective: 1000px;
-}
-
-.classy-card {
-  border-radius: 20px;
-  border: none;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  overflow: hidden;
-  height: 100%;
-}
-
-.card-img-wrapper {
-  overflow: hidden;
-  height: 250px;
-}
-
-.card-img-top-classy {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.classy-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.classy-card:hover .card-img-top-classy {
-  transform: scale(1.1);
-}
-
-.card-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-.card-price {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ff6b6b;
-}
-
-.qty-select {
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  padding: 8px 15px;
-  outline: none;
-  background-color: #f8f9fa;
-  font-weight: 500;
-}
-
-.btn-add-cart {
-  background: linear-gradient(135deg, #ff6b6b, #ff4757);
-  border: none;
-  border-radius: 30px;
-  padding: 10px 25px;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-  transition: all 0.3s ease;
   color: white;
 }
 
-.btn-add-cart:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
-  background: linear-gradient(135deg, #ff4757, #ff6b6b);
-  color: white;
-}
-
-.nav-link {
-  font-weight: 500;
-  color: #555 !important;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #ff6b6b !important;
-}
-
-.btn-primary {
-  background-color: #ff6b6b;
-  border-color: #ff6b6b;
-  border-radius: 50px;
-  padding: 8px 20px;
-}
+/* ── Auth Form Shared Styles ──
+   Used by Login, Signup, ForgotPassword,
+   ResetPassword, and the Reservation modal
+   ──────────────────────────────────────── */
+.auth-bg { background-color: var(--bg-dark) !important; }
 
 .auth-form-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 40px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  background-color: var(--bg-dark-card) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
 }
+.auth-form-container h1,
+.auth-form-container label { color: var(--text-white) !important; }
+
+.auth-form-container input {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.auth-form-container input::placeholder { color: #6b7280 !important; }
+.auth-form-container input:focus {
+  border-color: var(--accent-peach) !important;
+  box-shadow: 0 0 0 3px rgba(253, 164, 175, 0.2) !important;
+}
+
+/* Dark-themed form inputs — shared by Home modal & Reservations page */
+.res-input {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--text-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 10px !important;
+}
+.res-input:focus {
+  border-color: var(--accent-peach) !important;
+  box-shadow: 0 0 0 3px rgba(253, 164, 175, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.09) !important;
+}
+.res-input::placeholder { color: rgba(255, 255, 255, 0.35) !important; }
+.res-input option { background-color: var(--bg-dark-card); color: var(--text-white); }

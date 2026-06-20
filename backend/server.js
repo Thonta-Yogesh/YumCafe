@@ -14,25 +14,21 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/food', require('./routes/food'));
 app.use('/api/order', require('./routes/order'));
-
-const path = require('path');
-const { MongoMemoryServer } = require('mongodb-memory-server');
+app.use('/api/reservation', require('./routes/reservation'));
 
 const connectDB = async () => {
   try {
-    const mongoServer = await MongoMemoryServer.create({
-      instance: {
-        dbPath: path.join(__dirname, 'localdb')
-      }
-    });
-    const mongoUri = mongoServer.getUri();
+    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/hungryapp';
     await mongoose.connect(mongoUri);
-    console.log('Connected to In-Memory MongoDB');
+    console.log('✅ Connected to MongoDB successfully');
+    console.log(`🔗 Database URI: ${mongoUri}`);
+    
     app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
+      console.log(`🚀 Server listening on port ${port}`);
     });
   } catch (err) {
-    console.error('Error connecting to MongoDB', err);
+    console.error('❌ Error connecting to MongoDB:', err.message);
+    process.exit(1);
   }
 };
 

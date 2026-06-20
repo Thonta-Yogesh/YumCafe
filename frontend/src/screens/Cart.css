@@ -1,0 +1,164 @@
+/* ── Cart.css ──────────────────────────
+   Styles for Cart.jsx and shared cart
+   UI used by MyOrders.jsx
+   ──────────────────────────────────── */
+
+.cart-page { padding: 100px 0 80px; min-height: 100vh; background-color: var(--bg-dark); }
+
+/* Empty state */
+.cart-empty-container {
+  padding: 120px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+.cart-empty-title { font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+.cart-empty-sub { color: #a0a0a0; font-size: 1.1rem; }
+
+/* Titles */
+.cart-title { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; color: #fff; }
+.cart-title span { color: var(--accent-peach); }
+.cart-section-title { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 24px; color: #fff; }
+
+/* Cart items list */
+.cart-items-wrapper {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 32px;
+}
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.cart-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cart-item-name { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.2rem; margin-bottom: 6px; color: #fff; }
+.cart-item-meta { color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
+.cart-item-actions { display: flex; align-items: center; gap: 20px; }
+.cart-item-price { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-peach); }
+.cart-item-remove {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff4d4d;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cart-item-remove:hover { background: rgba(255, 77, 77, 0.15); transform: scale(1.05); }
+
+/* Checkout card */
+.cart-checkout-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; }
+.sticky-card { position: sticky; top: 100px; z-index: 10; }
+
+/* My Order card (also used in MyOrders.jsx) */
+.my-order-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Delivery / Dine-in toggle */
+.order-type-toggle { display: flex; background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 6px; margin-bottom: 24px; }
+.type-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 12px 0;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.type-btn.active { background: var(--accent-peach); color: var(--bg-dark); box-shadow: 0 4px 15px rgba(253, 164, 175, 0.3); }
+
+/* Form inputs */
+.cart-form-group { margin-bottom: 20px; }
+.cart-form-group label {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+.cart-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.2s ease;
+}
+.cart-input:focus { outline: none; border-color: var(--accent-peach); background: rgba(0, 0, 0, 0.4); }
+.cart-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+/* Coupon */
+.coupon-wrap { display: flex; gap: 10px; }
+.coupon-wrap .cart-input { text-transform: uppercase; }
+.btn-coupon {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-coupon:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* Totals */
+.cart-divider { border-top: 1px dashed rgba(255, 255, 255, 0.15); margin: 30px 0; opacity: 1; }
+.cart-totals { margin-bottom: 30px; }
+.cart-total-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1.05rem; color: rgba(255, 255, 255, 0.8); }
+.cart-total-row.final-total {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.btn-checkout { padding: 16px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 12px; }
+
+/* Location & ETA */
+.btn-use-location {
+  background: rgba(253, 164, 175, 0.1);
+  color: var(--accent-peach);
+  border: 1px solid rgba(253, 164, 175, 0.3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-use-location:hover { background: rgba(253, 164, 175, 0.2); }
+
+.eta-box {
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px dashed rgba(74, 222, 128, 0.4);
+  color: #4ade80;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 991px) {
+  .cart-checkout-card { position: relative; top: 0; }
+}

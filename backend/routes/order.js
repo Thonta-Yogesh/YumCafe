@@ -6,7 +6,7 @@ const fetchuser = require('../middleware/fetchuser');
 // ROUTE 1: Place an order: POST "/api/order/place". Login required
 router.post('/place', fetchuser, async (req, res) => {
   try {
-    const { items, totalAmount } = req.body;
+    const { items, totalAmount, subTotal, discount, tax, deliveryFee, orderType, address, tableNo } = req.body;
     
     if (!items || items.length === 0) {
       return res.status(400).json({ error: 'No items in cart' });
@@ -15,13 +15,20 @@ router.post('/place', fetchuser, async (req, res) => {
     const order = await Order.create({
       user: req.user.id,
       items,
-      totalAmount
+      totalAmount,
+      subTotal,
+      discount,
+      tax,
+      deliveryFee,
+      orderType,
+      address,
+      tableNo
     });
 
     res.json({ success: true, order });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: error.message });
   }
 });
 

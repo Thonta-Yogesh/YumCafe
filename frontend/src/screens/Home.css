@@ -1,0 +1,431 @@
+/* ── Home.css ──────────────────────────
+   Styles for Home.jsx — Hero, Belief,
+   Menu Reveal, Cravings, Vibe, Footer
+   ──────────────────────────────────── */
+
+/* ── Hero Section ── */
+.hero-section {
+  position: relative;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-v-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 55% at 15% 50%, rgba(120, 30, 50, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 55% at 85% 50%, rgba(120, 30, 50, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 80% at 50% 0%, #1c1014 0%, #0b0b0c 55%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+  padding-top: 72px;
+  padding-bottom: 8px;
+}
+
+/* Floating ingredient photos */
+.hero-float {
+  position: absolute;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: screen;
+  filter: brightness(1.05) contrast(1.1);
+}
+.hero-float--tl { width: 115px; height: 115px; top: 8%; left: 6%; animation: floatSlow 6s ease-in-out infinite alternate; }
+.hero-float--tr { width: 110px; height: 110px; top: 6%; right: 6%; animation: floatSlow 7s ease-in-out infinite alternate-reverse; }
+.hero-float--bl { width: 170px; height: 170px; top: 36%; left: 9%; animation: floatSlow 5s ease-in-out infinite alternate; }
+.hero-float--br { width: 170px; height: 170px; top: 32%; right: 9%; animation: floatSlow 8s ease-in-out infinite alternate-reverse; }
+
+.hero-badge {
+  background: rgba(30, 30, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-grey);
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 5.2rem;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -2.5px;
+  margin-bottom: 20px;
+  color: var(--text-white);
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-grey);
+  margin-bottom: 32px;
+  max-width: 480px;
+  text-align: center;
+}
+
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+
+.hero-stats {
+  display: flex;
+  gap: 18px;
+  font-size: 0.82rem;
+  color: var(--text-grey);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.hero-stats span { display: flex; align-items: center; gap: 5px; }
+.hero-stats-divider { opacity: 0.25; }
+
+/* Large platter image */
+.hero-image-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 2;
+  width: 100%;
+  margin-top: -10px;
+}
+
+.hero-platter-glow {
+  position: absolute;
+  top: 10%;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(253, 164, 175, 0.1) 0%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-platter-img {
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 30px 80px rgba(0,0,0,0.96)) brightness(0.97) contrast(1.05);
+  animation: rotateHeroPlatter 140s linear infinite; /* Slow continuous rotation */
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes rotateHeroPlatter {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatSlow {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-14px) rotate(8deg); }
+}
+
+/* 3 mini dish circles row */
+.hero-mini-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 32px;
+  padding: 24px 0 28px;
+  margin-top: 100px;
+  position: relative;
+  z-index: 2;
+}
+
+.mini-dish-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+.mini-dish-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 0 2px rgba(255,255,255,0.05);
+  border: 2px solid rgba(255,255,255,0.06);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.mini-dish-img--lg {
+  width: 240px;
+  height: 240px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.9), 0 0 0 3px rgba(253,164,175,0.18);
+  border: 2px solid rgba(253,164,175,0.12);
+}
+.mini-dish-img:hover { transform: scale(1.06) translateY(-8px); box-shadow: 0 30px 70px rgba(0,0,0,0.9); }
+
+.mini-dish-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-grey);
+  opacity: 0.65;
+}
+
+/* ── Floating decorative leaves ── */
+.floating-item {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+.floating-leaf-1 { bottom: 25%; left: 10%; width: 60px; height: 60px; animation: floatSlow 5s ease-in-out infinite alternate; }
+.floating-leaf-2 { bottom: 22%; right: 12%; width: 55px; height: 55px; animation: floatSlow 6s ease-in-out infinite alternate-reverse; }
+
+/* ── Belief Section ── */
+.belief-section { padding: 40px 0 80px; text-align: center; }
+.belief-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -1px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--text-white);
+}
+.belief-text span { font-weight: 800; }
+
+/* ── Scroll-Reveal Menu ── */
+.menu-reveal-section {
+  background-color: var(--bg-dark);
+  padding: 80px 0 60px;
+  overflow: hidden;
+  scroll-margin-top: 250px;
+}
+.menu-reveal-in-hero { padding: 16px 0 8px; background: transparent; }
+
+.menu-reveal-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.menu-col { list-style: none; margin: 0; padding: 0; }
+
+.menu-reveal-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.menu-reveal-item:last-child { border-bottom: none; }
+
+.menu-col--left .menu-reveal-item { transform: translateX(-60px); justify-content: flex-end; text-align: right; }
+.menu-col--left.is-visible .menu-reveal-item { opacity: 1; transform: translateX(0); }
+.menu-col--right .menu-reveal-item { transform: translateX(60px); justify-content: flex-start; text-align: left; }
+.menu-col--right.is-visible .menu-reveal-item { opacity: 1; transform: translateX(0); }
+
+.menu-reveal-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: 0.015em;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+.menu-reveal-item:hover .menu-reveal-name { color: var(--accent-peach); }
+
+.menu-reveal-line {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(to right, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.18) 3px, transparent 3px, transparent 8px);
+  min-width: 24px;
+}
+
+.menu-reveal-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-peach);
+  white-space: nowrap;
+}
+
+.menu-center-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s;
+}
+.menu-center-cta.is-visible { opacity: 1; transform: translateY(0); }
+
+.menu-center-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-peach);
+  margin: 0;
+}
+
+.btn-menu-view { padding: 14px 32px; font-size: 0.95rem; white-space: nowrap; box-shadow: 0 8px 30px rgba(253, 164, 175, 0.3); }
+.btn-menu-view:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(253, 164, 175, 0.45); }
+
+.menu-center-sub { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin: 0; letter-spacing: 0.04em; }
+
+@media (max-width: 900px) {
+  .menu-reveal-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .menu-col--left .menu-reveal-item { justify-content: space-between; text-align: left; }
+  .menu-col--right .menu-reveal-item { justify-content: space-between; }
+  .menu-center-cta { order: -1; margin-bottom: 8px; }
+}
+
+/* ── Signature Dishes (Craving Cards) ── */
+.craving-card {
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  height: 100%;
+}
+.craving-card:hover { transform: translateY(-10px); border-color: rgba(253, 164, 175, 0.2); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
+.craving-img-wrapper { overflow: hidden; height: 280px; }
+.craving-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.craving-card:hover .craving-img { transform: scale(1.06); }
+.craving-body { padding: 24px; }
+.craving-name { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.25rem; color: var(--text-white); margin-bottom: 6px; }
+.craving-price { font-weight: 700; color: var(--accent-peach); font-size: 1.15rem; }
+
+/* ── Choose Your Vibe ── */
+.vibe-card {
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+.vibe-card:hover { border-color: rgba(253, 164, 175, 0.2); background: rgba(255, 255, 255, 0.02); }
+.vibe-icon { font-size: 2rem; margin-bottom: 16px; display: inline-block; }
+.vibe-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--text-white); margin-bottom: 8px; }
+.vibe-desc { color: var(--text-grey); font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px; }
+
+/* ── Feedback Section ── */
+.feedback-box {
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 32px;
+  padding: 48px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+.feedback-avatar { width: 100%; max-width: 280px; height: 280px; border-radius: 24px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1); }
+
+/* ── Delivery Section ── */
+.delivery-tags { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+.delivery-tag {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-grey);
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.delivery-tag:hover { color: var(--accent-peach); border-color: var(--accent-peach); background-color: rgba(253, 164, 175, 0.06); transform: translateY(-2px); }
+
+.delivery-status-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 20px 40px;
+  display: inline-flex;
+  gap: 40px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+
+/* ── Mobile Layout Fixes ── */
+@media (max-width: 768px) {
+  /* Hero Section */
+  .hero-title {
+    font-size: 3rem;
+    letter-spacing: -1px;
+  }
+  .hero-subtitle {
+    font-size: 0.85rem;
+    padding: 0 16px;
+  }
+  .hero-cta-row {
+    justify-content: center;
+  }
+  
+  /* Floating items on mobile */
+  .hero-float {
+    display: none; /* Hide floats on mobile to prevent clutter/overlap */
+  }
+  .floating-item {
+    display: none; /* Hide floating leaves */
+  }
+  
+  /* Mini dishes */
+  .hero-mini-row {
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .mini-dish-img {
+    width: 120px;
+    height: 120px;
+  }
+  .mini-dish-img--lg {
+    width: 150px;
+    height: 150px;
+  }
+  
+  /* Sections */
+  .section-title, .belief-text {
+    font-size: 2.2rem;
+  }
+  
+  /* Feedback Box */
+  .feedback-box {
+    padding: 24px 16px;
+  }
+  
+  /* Delivery Box */
+  .delivery-status-box {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+  .delivery-status-box > div:nth-child(2) {
+    width: 100% !important;
+    height: 1px !important;
+  }
+  .delivery-status-box .text-start {
+    text-align: center !important;
+  }
+}

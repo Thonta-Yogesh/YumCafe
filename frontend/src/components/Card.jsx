@@ -35,7 +35,7 @@ export default function Card({ foodItem }) {
         </p>
         
         <div className="mt-auto">
-          {localStorage.getItem('authToken') ? (
+          {localStorage.getItem('smartCartAuthToken') ? (
             <>
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <span className="card-price">${foodItem.price}</span>

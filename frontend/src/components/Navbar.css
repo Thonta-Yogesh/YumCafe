@@ -1,0 +1,120 @@
+/* ── Navbar.css ────────────────────────
+   Glassmorphic sticky navigation bar
+   ──────────────────────────────────── */
+
+.custom-navbar {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  background: rgba(11, 11, 12, 0.85) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+}
+
+.nav-visible {
+  transform: translateY(0);
+}
+
+.nav-hidden {
+  transform: translateY(-100%);
+}
+
+.custom-navbar .navbar-brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: -1px;
+  color: var(--text-white) !important;
+}
+
+.custom-navbar .nav-link {
+  color: var(--text-grey) !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.25s ease;
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link.active {
+  color: var(--accent-peach) !important;
+}
+/* ── Mobile Drawer Overrides ── */
+@media (max-width: 991px) {
+  .navbar-collapse-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    left: auto;
+    width: 75vw;
+    max-width: 400px;
+    background: rgba(11, 11, 12, 0.95);
+    backdrop-filter: blur(25px);
+    z-index: 1050;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 80px 24px 24px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-y: auto;
+  }
+
+  .navbar-collapse-drawer.open {
+    transform: translateX(0);
+  }
+
+  .navbar-collapse-drawer .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px !important;
+    width: 100%;
+    margin-bottom: 32px !important;
+  }
+
+  .navbar-collapse-drawer .nav-link {
+    font-size: 1.25rem;
+    padding: 8px 0;
+  }
+
+  .navbar-collapse-drawer .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    width: 100%;
+    gap: 16px !important;
+  }
+
+  .btn-close-menu {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    padding: 8px;
+    line-height: 1;
+    z-index: 1060;
+  }
+
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1040;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+}
+
+  .navbar-collapse-drawer.collapse:not(.show) {
+    display: flex !important; /* Override bootstrap mobile collapse hiding */
+  }

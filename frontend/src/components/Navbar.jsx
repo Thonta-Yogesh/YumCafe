@@ -1,60 +1,142 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import './Navbar.css';
 import { useCart } from './ContextReducer';
+import BorderGlow from './BorderGlow';
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const cartItems = useCart();
 
+  const [showNav, setShowNav] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window !== 'undefined') {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+          // Scrolling down & past 100px threshold
+          setShowNav(false);
+        } else {
+          // Scrolling up or at the top
+          setShowNav(true);
+        }
+        lastScrollY.current = currentScrollY;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('smartCartAuthToken');
     navigate('/login');
   };
 
-  return (
-    <div>
-      <nav className="navbar navbar-expand-lg custom-navbar navbar-light">
-        <div className="container-fluid">
-          <Link className="navbar-brand fs-2 font-weight-bold" to="/" style={{color: '#ff6b6b'}}>HungryApp</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          
-          <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link fs-5 mx-3 active" aria-current="page" to="/">Home</Link>
-              </li>
-              {localStorage.getItem('authToken') &&
-                <li className="nav-item">
-                  <Link className="nav-link fs-5 mx-3 active" aria-current="page" to="/myorders">My Orders</Link>
-                </li>
-              }
-            </ul>
+  const scrollToMenu = () => {
+    const element = document.getElementById('menu-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('menu-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
 
-            <div className="d-flex">
-              {!localStorage.getItem('authToken') ?
-                <div className="d-flex">
-                  <Link className="btn btn-outline-primary mx-1" to="/login">Login</Link>
-                  <Link className="btn btn-primary mx-1" to="/signup">Signup</Link>
-                </div>
-                :
-                <div>
-                  <Link className="btn btn-outline-success mx-1 position-relative" to="/cart">
-                    My Cart
-                    {cartItems.length > 0 &&
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {cartItems.length}
-                      </span>
-                    }
-                  </Link>
-                  <button onClick={handleLogout} className="btn btn-danger mx-1">Logout</button>
-                </div>
-              }
-            </div>
+  return (
+    <nav className={`navbar navbar-expand-lg custom-navbar navbar-dark ${showNav ? 'nav-visible' : 'nav-hidden'}`}>
+      <div className="container">
+        {/* Brand Name */}
+        <Link className="navbar-brand" to="/">Yum</Link>
+
+        <button 
+          className="navbar-toggler border-0" 
+          type="button" 
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className={`collapse navbar-collapse navbar-collapse-drawer ${mobileMenuOpen ? 'open' : ''}`} id="navbarNav">
+          {/* Close button for mobile menu */}
+          <button 
+            className="btn-close-menu d-lg-none" 
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+
+          {/* Centered Navigation Links */}
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-4 gap-xl-5">
+            <li className="nav-item">
+              <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+            </li>
+            <li className="nav-item">
+              <span className={`nav-link ${location.pathname === '/menu' ? 'active' : ''}`} style={{ cursor: 'pointer' }} onClick={() => { navigate('/menu'); setMobileMenuOpen(false); }}>Menu</span>
+            </li>
+            <li className="nav-item">
+              <span className={`nav-link ${location.pathname === '/reservations' ? 'active' : ''}`} style={{ cursor: 'pointer' }} onClick={() => { navigate('/reservations'); setMobileMenuOpen(false); }}>Reservations</span>
+            </li>
+            {localStorage.getItem('smartCartAuthToken') &&
+              <li className="nav-item">
+                <Link className={`nav-link ${location.pathname === '/myorders' ? 'active' : ''}`} to="/myorders" onClick={() => setMobileMenuOpen(false)}>My Orders</Link>
+              </li>
+            }
+          </ul>
+
+          {/* Right Action Buttons */}
+          <div className="d-flex align-items-center gap-3">
+            <BorderGlow
+              borderRadius={10}
+              glowRadius={12}
+              className="d-none d-lg-inline-flex p-0"
+              style={{ width: 'max-content', padding: '2px' }}
+              backgroundColor="var(--bg-dark)"
+            >
+              <button onClick={() => { scrollToMenu(); setMobileMenuOpen(false); }} className="btn m-0 text-peach" style={{ padding: '8px 20px', border: '2px solid rgba(253, 164, 175, 0.4)', borderRadius: '10px', fontWeight: '600' }}>
+                Order Now
+              </button>
+            </BorderGlow>
+            {!localStorage.getItem('smartCartAuthToken') ? (
+              <>
+                <Link className="btn btn-trans" to="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+                <Link className="btn btn-peach" to="/signup" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link>
+              </>
+            ) : (
+              <>
+                <Link className="btn-cart-dark" to="/cart" title="View Cart" onClick={() => setMobileMenuOpen(false)}>
+                  <span>🛒</span>
+                  {cartItems.length > 0 && (
+                    <span className="badge-green">
+                      {cartItems.length}
+                    </span>
+                  )}
+                </Link>
+                <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} className="btn btn-trans" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
+                  Logout
+                </button>
+              </>
+            )}
           </div>
         </div>
-      </nav>
-    </div>
+
+        {/* Overlay for mobile drawer */}
+        {mobileMenuOpen && (
+          <div 
+            className="mobile-menu-overlay d-lg-none" 
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+      </div>
+    </nav>
   );
 }
