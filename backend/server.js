@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+require('./redisClient'); // Initialize Redis connection
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/food', require('./routes/food'));
 app.use('/api/order', require('./routes/order'));

@@ -25,7 +25,8 @@ Built with the MERN stack (MongoDB, Express, React, Node.js), this platform demo
 ### ⚙️ Backend (Node.js + Express)
 - **Robust RESTful API:** A well-structured Express.js backend handling CRUD operations for Menu Items, User Authentication, Direct Delivery Orders, and Table Reservations.
 - **Secure Authentication:** Implements JWT (JSON Web Tokens) and bcrypt for secure user registration, login, and protected route access.
-- **Cloud Database Integration:** Fully integrated with **MongoDB Atlas** for scalable, cloud-based data storage.
+- **Cloud Database Integration:** Fully integrated with **MongoDB Atlas** for scalable, cloud-based data storage, with optimized B-Tree indexing on core fields to ensure high read throughput.
+- **In-Memory Caching:** Implements **Redis** caching to serve the cafe menu instantly, heavily reducing database load and latency during peak usage.
 - **Data Modeling:** Utilizes Mongoose ODM for strict schema validation and relationship mapping.
 
 ---
@@ -56,6 +57,7 @@ Built with the MERN stack (MongoDB, Express, React, Node.js), this platform demo
    # PORT=5001
    # MONGO_URI=your_mongodb_connection_string
    # JWT_SECRET=your_jwt_secret
+   # REDIS_URL=your_redis_connection_string
    node server.js
    ```
 

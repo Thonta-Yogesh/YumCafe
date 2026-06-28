@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Food = require('../models/Food');
+const redisClient = require('../redisClient');
 
 // Initialize dummy data (Cafe Menu: Pizza, Burgers, Pasta, Beverages, Desserts, Salads)
 router.get('/seed', async (req, res) => {
@@ -53,7 +54,30 @@ router.get('/seed', async (req, res) => {
 // ROUTE 1: Get all food items: GET "/api/food/all"
 router.get('/all', async (req, res) => {
   try {
+    const cacheKey = 'cafe_menu';
+    
+    // Check if the menu is in Redis Cache
+    try {
+      const cachedMenu = await redisClient.get(cacheKey);
+      if (cachedMenu) {
+        console.log('⚡ Fetched menu from Redis Cache');
+        return res.json(JSON.parse(cachedMenu));
+      }
+    } catch (redisErr) {
+      console.warn('⚠️ Redis read failed, falling back to MongoDB:', redisErr.message);
+    }
+
+    // If not in cache, fetch from MongoDB
     const foods = await Food.find();
+    console.log('💽 Fetched menu from MongoDB');
+    
+    // Save to Redis Cache (expire in 1 hour = 3600 seconds)
+    try {
+      await redisClient.setEx(cacheKey, 3600, JSON.stringify(foods));
+    } catch (redisErr) {
+      console.warn('⚠️ Redis write failed:', redisErr.message);
+    }
+
     res.json(foods);
   } catch (error) {
     console.error(error.message);

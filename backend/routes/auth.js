@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const fetchuser = require('../middleware/fetchuser');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-const JWT_SECRET = process.env.JWT_SECRET || 'SmartCartSecretKey123!';
+const JWT_SECRET = process.env.JWT_SECRET || 'YumCafeSuperSecretKey2026!';
 
 // ROUTE 1: Create a user: POST "/api/auth/register". No login required
 router.post('/register', async (req, res) => {

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../models/Reservation');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET || 'SmartCartSecretKey123!';
+const JWT_SECRET = process.env.JWT_SECRET || 'YumCafeSuperSecretKey2026!';
 const fetchuser = require('../middleware/fetchuser');
 
 // Optional fetchuser middleware for bookings made by non-logged-in users

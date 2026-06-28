@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true, index: true },
   items: [
     {
       foodId: { type: String, required: false },
@@ -18,7 +18,7 @@ const OrderSchema = new mongoose.Schema({
   orderType: { type: String, enum: ['Delivery', 'Table'], default: 'Delivery' },
   address: { type: String },
   tableNo: { type: String },
-  date: { type: Date, default: Date.now },
+  date: { type: Date, default: Date.now, index: true },
 });
 
 module.exports = mongoose.model('order', OrderSchema);
